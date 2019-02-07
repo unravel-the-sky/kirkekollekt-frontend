@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+      top bar here, wee
+  </div>
 </template>
 
 <style lang="scss" scoped>

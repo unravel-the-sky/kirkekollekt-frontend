@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+      smelly footer wee
+  </div>
 </template>
 
 <style lang="scss" scoped>

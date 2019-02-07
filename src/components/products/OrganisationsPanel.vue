@@ -1,12 +1,26 @@
 <template>
-  <div></div>
+  <div class="main-card-holder">
+    <org-card v-for="org in organisations" :key="org._id" :organisation="org"></org-card>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.main-card-holder {
+    @include general-flex;
+}
 </style>
 
 <script>
 export default {
-
+  name: 'orgs-panel',
+  components: {
+    'org-card': () => import('./OrganisationCard.vue')
+  },
+  props: {
+    organisations: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>

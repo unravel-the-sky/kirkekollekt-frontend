@@ -1,3 +1,25 @@
 // devices
 $mobile-width: 425px;
 $tablet-width: 769px;
+
+// fonts
+$main-font-style: 'Roboto',
+sans-serif;
+
+// margins
+$topbar-margin: 40px;
+
+@mixin general-flex {
+    display: flex;
+    align-items: center;
+}
+
+@mixin navbar {
+    @include general-flex;
+
+    width: 100%;
+    position: fixed;
+    background: green;
+    height: $topbar-margin;
+    justify-content: center;
+}
