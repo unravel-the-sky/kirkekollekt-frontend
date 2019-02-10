@@ -6,7 +6,8 @@ module.exports = {
   css: {
       loaderOptions: {
           sass: {
-              data: `@import "@/styles/main.scss";`
+              data: `@import "@/styles/main.scss";`,
+              implementation: require("node-sass")
           }
       }
   }
