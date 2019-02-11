@@ -5,7 +5,17 @@ const cosmic = require('cosmicjs')({
     token: apiToken
 })
 
+const wpiApi = require('wpapi/superagent')
+const wp = new wpiApi({endpoint: 'https://kirkekollekt.no/wp-json'})
+
 export default {
+    getWpContent(){
+        wp.posts().then(data => {
+            console.log('whoaa, data ', data)
+        }).catch(err => {
+            console.error('poop ', err)
+        })
+    },
     getBucketInfo() {
         const bucket = cosmic.bucket({
             slug: bucketName,
