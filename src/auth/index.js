@@ -10,8 +10,16 @@ const wp = new wpiApi({endpoint: 'https://kirkekollekt.no/wp-json'})
 
 export default {
     getWpContent(){
-        wp.posts().then(data => {
-            console.log('whoaa, data ', data)
+        return wp.posts().perPage(100).then(res => {
+            // console.log('whoaa, data ', data)
+
+            const result = {
+                data: res,
+                error: null
+            }
+
+            return result;
+
         }).catch(err => {
             console.error('poop ', err)
         })

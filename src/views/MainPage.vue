@@ -52,7 +52,7 @@ export default {
   methods: {
     async getInfo() {
       try {
-        // const temp = auth.getWpContent();
+        // const temp = await auth.getWpContent();
         const result = await auth.getBucketInfo();
         console.log('here is the result, wee ', result.data);
         this.organisations = result.data.objects;
