@@ -1,17 +1,41 @@
 // this is where to fetch the data
-const apiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNla2RlbWlyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTU1YmU0MWE3NzYyZGZhY2ExODc4ZTg5NzNiOWI3MWEiLCJpYXQiOjE1NDk1NTMyODh9.x_-kY2tSm8BQIFqrhFyep5vAFZVsq1DZRCd2h6NRZ-Q';
+
+// CosmisJS
+const cosmicJsApiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNla2RlbWlyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTU1YmU0MWE3NzYyZGZhY2ExODc4ZTg5NzNiOWI3MWEiLCJpYXQiOjE1NDk1NTMyODh9.x_-kY2tSm8BQIFqrhFyep5vAFZVsq1DZRCd2h6NRZ-Q';
 const bucketName = 'ingunn-test'
 const cosmic = require('cosmicjs')({
-    token: apiToken
+    token: cosmicJsApiToken
 })
 
+// Wordpress
 const wpiApi = require('wpapi/superagent')
 const wp = new wpiApi({endpoint: 'https://kirkekollekt.no/wp-json'})
 
+// Hello ButterCMS
+const butterCmsApiToken = '40c00288ea4f021316704632a965103990e294cb'
+import Butter from 'buttercms'
+const butter = Butter(butterCmsApiToken)
+
 export default {
+    getButterCmsContent(){
+        return butter.page.retrieve('*', 'organisations')
+        .then(res => {
+            console.log('whoa, buttercms: ', res)
+        }).catch(err => {
+            console.error('poop, error: ', err)
+        })
+        // return butter.post.list({
+        //     page: 1,
+        //     page_size: 10
+        // }).then(res => {
+        //     console.log('whoa, buttercms: ', res)
+        // }).catch(err => {
+        //     console.error('poop, error: ', err)
+        // })
+    },
     getWpContent(){
         return wp.posts().perPage(100).then(res => {
-            // console.log('whoaa, data ', data)
+            console.log('whoaa, data ', res)
 
             const result = {
                 data: res,

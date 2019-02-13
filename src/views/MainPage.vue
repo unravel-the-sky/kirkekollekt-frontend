@@ -17,7 +17,7 @@ body {
   }
 
   .main-panel-holder {
-    padding-top: $topbar-margin;
+    padding-top: $logo-height;
   }
 
   .bottombar-holder {
@@ -52,7 +52,9 @@ export default {
   methods: {
     async getInfo() {
       try {
-        // const temp = await auth.getWpContent();
+        const temp = await auth.getWpContent();
+        const tempButter = await auth.getButterCmsContent();
+
         const result = await auth.getBucketInfo();
         console.log('here is the result, wee ', result.data);
         this.organisations = result.data.objects;
