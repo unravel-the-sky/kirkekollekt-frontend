@@ -2,6 +2,10 @@
 $mobile-width: 425px;
 $tablet-width: 769px;
 
+// spacing
+$default-padding-small: 10px;
+$default-padding-large: 20px;
+
 // fonts
 $main-font-style: 'Roboto',
 sans-serif;
@@ -21,5 +25,5 @@ $topbar-margin: 40px;
     position: fixed;
     background: green;
     height: $topbar-margin;
-    justify-content: center;
+    // justify-content: center;
 }
