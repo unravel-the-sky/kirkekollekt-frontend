@@ -60,7 +60,7 @@ export default {
                 // console.log('here is the data: ', res.bucket)
 
                 const result = {
-                    data: res.bucket,
+                    data: res.bucket.objects,
                     error: null
                 }
 

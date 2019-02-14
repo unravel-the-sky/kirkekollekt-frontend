@@ -57,7 +57,7 @@ export default {
 
         const result = await auth.getBucketInfo();
         console.log('here is the result, wee ', result.data);
-        this.organisations = result.data.objects;
+        this.organisations = result.data;
         
       } catch (err) {
         console.log('error! ', err)
