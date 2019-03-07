@@ -1,7 +1,7 @@
 <template>
   <div class="main-page-holder">
     <top-bar class="topbar-holder"></top-bar>
-    <main-panel v-if="organisations" class="main-panel-holder" :organisations="organisations"></main-panel>
+    <main-panel class="main-panel-holder" :organisations="organisations"></main-panel>
     <bottom-bar class="bottombar-holder"></bottom-bar>
   </div>
 </template>
