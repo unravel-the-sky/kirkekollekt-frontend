@@ -7,6 +7,10 @@
 <style lang="scss" scoped>
 .main-card-holder {
     @include general-flex;
+
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: space-around;
 }
 </style>
 

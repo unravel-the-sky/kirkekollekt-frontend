@@ -9,21 +9,25 @@ const cosmic = require('cosmicjs')({
 
 // Wordpress
 const wpiApi = require('wpapi/superagent')
-const wp = new wpiApi({endpoint: 'https://kirkekollekt.no/wp-json'})
+const wp = new wpiApi({
+    endpoint: 'https://kirkekollekt.no/wp-json'
+})
 
 // Hello ButterCMS
 const butterCmsApiToken = '40c00288ea4f021316704632a965103990e294cb'
 import Butter from 'buttercms'
 const butter = Butter(butterCmsApiToken)
 
+import logoData from './../temp.js'
+
 export default {
-    getButterCmsContent(){
+    getButterCmsContent() {
         return butter.page.retrieve('*', 'organisations')
-        .then(res => {
-            console.log('whoa, buttercms: ', res)
-        }).catch(err => {
-            console.error('poop, error: ', err)
-        })
+            .then(res => {
+                console.log('whoa, buttercms: ', res)
+            }).catch(err => {
+                console.error('poop, error: ', err)
+            })
         // return butter.post.list({
         //     page: 1,
         //     page_size: 10
@@ -33,7 +37,7 @@ export default {
         //     console.error('poop, error: ', err)
         // })
     },
-    getWpContent(){
+    getWpContent() {
         return wp.posts().perPage(100).then(res => {
             console.log('whoaa, data ', res)
 
@@ -74,5 +78,12 @@ export default {
 
                 return result;
             })
+    },
+
+    /**
+     * THIS IS ONLY FOR TESTING FRONTEND
+     */
+    getHardCodedData() {
+        return logoData;
     }
 }

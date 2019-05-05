@@ -18,9 +18,15 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  box-shadow: $boxes-shadow;
+  z-index: 99;
 
   .logo-img {
     height: $logo-height;
+
+    @media(max-width: $small-screen){
+      height: $logo-height-small;
+    }
   }
 
   .topbar-left-holder {
@@ -32,6 +38,13 @@
       font-size: 17px;
       color: $topbar-text-color;
       font-weight: 600;
+      min-width: 370px;
+
+      @media (max-width: $small-screen) {
+        font-size: 14px;
+        font-weight: 500;
+        min-width: 340px;
+      }
 
       .topbar-steps {
         margin-block-start: 0;

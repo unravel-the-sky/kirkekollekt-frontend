@@ -22,16 +22,15 @@
   align-items: center;
 }
 .modal-container {
-  overflow-y: auto;
   overflow-x: hidden;
-  margin: 8% auto 0;
   border-radius: $button-border-radius;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-  text-align: left;
-  position: relative;
+  // position: relative;
   -webkit-overflow-scrolling: touch;
   overflow-y: hidden;
+  background: white;
+  width: 70%;
 }
 @media (max-width: $mobile-width) {
   .modal-container {
@@ -51,18 +50,14 @@
     margin: 0 auto;
   }
 }
-.modal-enter {
-  opacity: 0;
-}
-
-.modal-leave-active {
+.modal-enter, .modal-leave-active {
   opacity: 0;
 }
 
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+  opacity: 0;
+  transform: scale(0.9);
 }
 </style>
 
@@ -86,7 +81,6 @@ export default {
   },
 
   created() {
-    console.log('hello i am a modal');
     console.log('user agent: ', navigator.appVersion);
   }
 };

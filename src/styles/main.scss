@@ -8,16 +8,29 @@ $tablet-width: 769px;
 $default-padding-small: 10px;
 $default-padding-large: 20px;
 $logo-height: 90px;
+$logo-height-small: 70px;
 
 // fonts
 $main-font-style: 'Roboto',
 sans-serif;
+$title-text: 14px;
+$main-text: 12px;
 
 // colors
 $topbar-text-color: #32649b;
 
 // margins
 $topbar-margin: 40px;
+
+// shadows
+$boxes-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
+$boxes-shadow-hover: 0px 9px 15px rgba(0, 0, 0, 0.08);
+
+// buttons
+$button-border-radius: 12px;
+
+// breakpoints
+$small-screen: 950px;
 
 body {
     background: #f9f9f9;
