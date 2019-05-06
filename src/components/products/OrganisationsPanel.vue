@@ -1,7 +1,6 @@
 <template>
   <div class="main-card-holder">
-    <span @click="sendMail()">asd</span>
-    <org-card v-for="org in organisations" :key="org._id" :organisation="org"></org-card>
+    <org-card v-for="(org, index) in organisations" :id="index" :key="org._id" :organisation="org"></org-card>
   </div>
 </template>
 

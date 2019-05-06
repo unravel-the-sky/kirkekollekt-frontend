@@ -5,10 +5,15 @@
     </div>
     <div class="org-card-bottom-holder">
       <span class="org-card-title">{{organisationTitle}}</span>
-      <!-- <div class="org-card-active-panel">active</div> -->
     </div>
 
-    <organisation-modal v-if="openOrganisationModal" @close="openOrganisationModal = !openOrganisationModal"></organisation-modal>
+    <organisation-modal
+      v-if="openOrganisationModal"
+      @close="handleClick"
+      @select="handleSelect"
+      :organisation="organisation"
+      :id="id"
+    ></organisation-modal>
   </div>
 </template>
 
@@ -32,7 +37,7 @@
   cursor: pointer;
   padding: 0 10px;
 
-  @media (max-width: $small-screen){
+  @media (max-width: $small-screen) {
     width: 150px;
   }
 
@@ -77,30 +82,42 @@ export default {
     organisation: {
       type: Object,
       required: true
+    },
+    id: {
+      type: Number,
+      required: true,
+      default: 0
     }
   },
   components: {
-    'organisation-modal': () => import('./OrganisationModal.vue')
+    "organisation-modal": () => import("./OrganisationModal.vue")
   },
-  data(){
+  data() {
     return {
       isActive: false,
       openOrganisationModal: false
-    }
+    };
   },
   computed: {
     organisationImage() {
       return require("@/logos/" + this.organisation.image);
     },
-    organisationTitle(){
-      const result = this.organisation.title.toLowerCase().replace('logo_', '').replace('.jpg', '').replace('_', ' ');
+    organisationTitle() {
+      const result = this.organisation.title
+        .toLowerCase()
+        .replace("logo_", "")
+        .replace(".jpg", "")
+        .replace("_", " ");
       return result;
     }
   },
   methods: {
-    handleClick(){
+    handleClick() {
       // this.isActive = !this.isActive;
       this.openOrganisationModal = !this.openOrganisationModal;
+    },
+    handleSelect(id) {
+      this.isActive = id === this.id;
     }
   }
 };

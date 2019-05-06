@@ -16,18 +16,23 @@ sans-serif;
 $title-text: 14px;
 $main-text: 12px;
 
+$modal-title-text-size: 20px;
+$modal-text-size: 15px;
+
 // colors
 $topbar-text-color: #32649b;
 
 // margins
 $topbar-margin: 40px;
+$modal-margin: 40px 40px;
 
 // shadows
 $boxes-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08);
 $boxes-shadow-hover: 0px 9px 15px rgba(0, 0, 0, 0.08);
 
 // buttons
-$button-border-radius: 12px;
+$modal-border-radius: 12px;
+$button-border-radius: 18px;
 
 // breakpoints
 $small-screen: 950px;

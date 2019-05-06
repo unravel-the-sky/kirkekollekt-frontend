@@ -20,13 +20,13 @@
   transition: opacity 0.3s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .modal-container {
   overflow-x: hidden;
-  border-radius: $button-border-radius;
+  border-radius: $modal-border-radius;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-  // position: relative;
   -webkit-overflow-scrolling: touch;
   overflow-y: hidden;
   background: white;
@@ -50,10 +50,11 @@
     margin: 0 auto;
   }
 }
-.modal-enter, .modal-leave-active {
+
+.modal-enter,
+.modal-leave-active {
   opacity: 0;
 }
-
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
   opacity: 0;
@@ -64,24 +65,24 @@
 
 <script>
 export default {
-  name: 'modal',
+  name: "generic-modal",
   methods: {
     close() {
-      this.$emit('close');
+      this.$emit("close");
     }
   },
   mounted() {
-    document.addEventListener('keydown', event => {
+    document.addEventListener("keydown", event => {
       if (this.show && event.keyCode == 27) {
         // this is to catch ESC events
         this.close();
-        console.log('hello you pressed ESC');
+        console.log("hello you pressed ESC");
       }
     });
   },
 
   created() {
-    console.log('user agent: ', navigator.appVersion);
+    console.log("user agent: ", navigator.appVersion);
   }
 };
 </script>

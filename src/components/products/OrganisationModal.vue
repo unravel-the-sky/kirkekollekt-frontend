@@ -1,12 +1,17 @@
 <template>
-  <generic-modal @close="close" id="modal">
+  <generic-modal id="modal">
     <div class="modal-holder">
       <div class="close-button">
         <!-- <img @click="close()" class="desktop-close" src="@/assets/imgs/close.svg"> -->
       </div>
-      <div class="modal-header"></div>
+      <div class="modal-header">{{organisation.title}}</div>
       <div class="modal-body">
-        HELLO
+        <img :src="organisationImage">
+        <div>
+          <p>Finn ut mer</p>
+          <p>link to pdf</p>
+        </div>
+        <generic-button :title="'select'" @clicked="handleSelect"></generic-button>
       </div>
       <div class="modal-footer"></div>
     </div>
@@ -15,27 +20,36 @@
 
 <style lang="scss" scoped>
 .modal-holder {
-  // position: relative;
-}
-.modal-header {
-  color: #9b9b9b;
-  cursor: default;
-  margin: 20px 0 10px 20px;
-}
-.close-button {
-  float: right;
-  cursor: pointer;
-  margin-right: 20px;
-}
-.desktop-close {
-  width: 20px;
-}
-.modal-body {
-  font-size: $main-text;
-  margin-bottom: 30px;
-  letter-spacing: 1px;
-  background-size: 250px 150px;
-  overflow: hidden;
+  min-height: 40vh;
+  margin: $modal-margin;
+
+  .modal-header {
+    color: #9b9b9b;
+    font-size: $modal-title-text-size;
+    margin-bottom: 40px;
+  }
+  .close-button {
+    float: right;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  .desktop-close {
+    width: 20px;
+  }
+  .modal-body {
+    font-size: $modal-text-size;
+    overflow: hidden;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: auto;
+
+    img {
+      height: 120px;
+      margin-right: 40px;
+    }
+  }
 }
 </style>
 
@@ -43,7 +57,33 @@
 export default {
   name: "organisation-modal",
   components: {
-    "generic-modal": () => import("./../generics/GenericModal.vue")
+    "generic-modal": () => import("./../generics/GenericModal.vue"),
+    "generic-button": () => import("./../generics/GenericButton.vue")
+  },
+  props: {
+    organisation: {
+      type: Object,
+      required: true
+    },
+    id: {
+      type: Number,
+      required: true,
+      default: 0
+    }
+  },
+  computed: {
+    organisationImage() {
+      return require("@/logos/" + this.organisation.image);
+    }
+  },
+  methods: {
+    handleSelect() {
+      this.$emit("select", this.id);
+      this.close();
+    },
+    close() {
+      this.$emit("close");
+    }
   }
 };
 </script>
