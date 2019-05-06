@@ -20,7 +20,25 @@ const butter = Butter(butterCmsApiToken)
 
 import logoData from './../temp.js'
 
+// mailgun GREIE
+const mailgun = require('mailgun.js')
+const mg = mailgun.client({
+    username: 'api',
+    key: 'key-dd199113223399e4565548e74d19f1a5'
+})
+
 export default {
+    sendEmail() {
+        mg.messages.create('sandboxef7ef566179f424c941992c9111bf409.mailgun.org', {
+                from: 'Sadan <sadan@wee.com>',
+                to: ['sekdemir@gmail.com'],
+                subject: 'WEEEEE!',
+                text: 'whoa testing mailgun, my god, dwoooaaaaahhh',
+                html: '<h1> i mean, whoaaa </h1>'
+            })
+            .then(res => console.log('response: ', res))
+            .catch(err => console.error('oups, ', err))
+    },
     getButterCmsContent() {
         return butter.page.retrieve('*', 'organisations')
             .then(res => {
@@ -28,14 +46,6 @@ export default {
             }).catch(err => {
                 console.error('poop, error: ', err)
             })
-        // return butter.post.list({
-        //     page: 1,
-        //     page_size: 10
-        // }).then(res => {
-        //     console.log('whoa, buttercms: ', res)
-        // }).catch(err => {
-        //     console.error('poop, error: ', err)
-        // })
     },
     getWpContent() {
         return wp.posts().perPage(100).then(res => {
