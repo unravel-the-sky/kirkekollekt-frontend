@@ -2,14 +2,8 @@
   <div class="topbar-main-holder">
     <div class="topbar-left-holder">
       <img src="@/assets/imgs/kirkekollekt-header.png" class="logo-img" />
-
-      <!-- <div class="topbar-steps-holder">
-        <ol class="topbar-steps">
-          <li class="topbar-step" v-for="step in steps" :key="step">{{step}}</li>
-        </ol>
-      </div>-->
     </div>
-    <div class="topbar-register-holder">
+    <div class="topbar-register-holder" v-if="$route.path !== '/register'">
       <span class="register-text">to register organisation</span>
       <div class="register-button-holder" @click="handleRegister">
         <span class="register-button-text">klikk her</span>
@@ -67,21 +61,7 @@
     justify-content: center;
 
     .register-button-holder {
-      @include general-flex;
-
-      justify-content: center;
-      padding: 15px;
-      margin: 0 15px;
-      border-radius: $button-border-radius;
-      background: $kpk-primary-color;
-      color: white;
-      min-width: 90px;
-      box-shadow: $boxes-shadow;
-      cursor: pointer;
-
-      &:hover {
-        box-shadow: $boxes-shadow-hover;
-      }
+      @include default-button;
     }
   }
 }

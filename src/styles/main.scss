@@ -11,8 +11,7 @@ $logo-height: 90px;
 $logo-height-small: 70px;
 
 // fonts
-$main-font-style: 'Roboto',
-sans-serif;
+$main-font-style: "Roboto", sans-serif;
 $title-text: 14px;
 $main-text: 12px;
 
@@ -21,7 +20,7 @@ $modal-text-size: 15px;
 
 // colors
 $topbar-text-color: #32649b;
-$kpk-primary-color: #F29200;
+$kpk-primary-color: #f29200;
 
 // margins
 $topbar-margin: 40px;
@@ -39,20 +38,38 @@ $button-border-radius: 18px;
 $small-screen: 950px;
 
 body {
-    background: #f9f9f9;
+  background: #f9f9f9;
 }
 
 @mixin general-flex {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 @mixin navbar {
-    @include general-flex;
+  @include general-flex;
 
-    width: 100%;
-    position: fixed;
-    background: white;
-    height: $topbar-margin;
-    // justify-content: center;
+  width: 100%;
+  position: fixed;
+  background: white;
+  height: $topbar-margin;
+  // justify-content: center;
+}
+
+@mixin default-button {
+  @include general-flex;
+
+  justify-content: center;
+  padding: 15px;
+  margin: 0 15px;
+  border-radius: $button-border-radius;
+  background: $kpk-primary-color;
+  color: white;
+  min-width: 90px;
+  box-shadow: $boxes-shadow;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: $boxes-shadow-hover;
+  }
 }

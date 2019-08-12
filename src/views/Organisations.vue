@@ -34,10 +34,6 @@ export default {
       try {
         const result = auth.getHardCodedData();
         this.organisations = result;
-        // this.$router.push({
-        //   name: "organisations",
-        //   params: { organisations: this.organisations }
-        // });
       } catch (err) {
         console.error("error while getting data: ", err);
       }

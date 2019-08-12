@@ -4,7 +4,7 @@
     <div class="main-panel-container">
       <router-view></router-view>
     </div>
-    <bottom-bar class="bottombar-holder"></bottom-bar>
+    <!-- <bottom-bar class="bottombar-holder"></bottom-bar> -->
   </div>
 </template>
 
