@@ -9,7 +9,7 @@
     @include general-flex;
 
     flex-wrap: wrap;
-    width: 90%;
+    width: 100%;
     justify-content: space-around;
 }
 </style>

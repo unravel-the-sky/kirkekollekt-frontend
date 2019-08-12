@@ -1,14 +1,21 @@
 <template>
   <div class="topbar-main-holder">
     <div class="topbar-left-holder">
-      <img src="@/assets/imgs/kirkekollekt-header.png" class="logo-img">
-      <div class="topbar-steps-holder">
+      <img src="@/assets/imgs/kirkekollekt-header.png" class="logo-img" />
+
+      <!-- <div class="topbar-steps-holder">
         <ol class="topbar-steps">
           <li class="topbar-step" v-for="step in steps" :key="step">{{step}}</li>
         </ol>
+      </div>-->
+    </div>
+    <div class="topbar-register-holder">
+      <span class="register-text">to register organisation</span>
+      <div class="register-button-holder" @click="handleRegister">
+        <span class="register-button-text">klikk her</span>
       </div>
     </div>
-    <img src="@/assets/imgs/kirkekollekt-logo.jpg" class="logo-img">
+    <img src="@/assets/imgs/kirkekollekt-logo.jpg" class="logo-img" />
   </div>
 </template>
 
@@ -24,7 +31,7 @@
   .logo-img {
     height: $logo-height;
 
-    @media(max-width: $small-screen){
+    @media (max-width: $small-screen) {
       height: $logo-height-small;
     }
   }
@@ -53,6 +60,30 @@
       }
     }
   }
+
+  .topbar-register-holder {
+    @include general-flex;
+
+    justify-content: center;
+
+    .register-button-holder {
+      @include general-flex;
+
+      justify-content: center;
+      padding: 15px;
+      margin: 0 15px;
+      border-radius: $button-border-radius;
+      background: $kpk-primary-color;
+      color: white;
+      min-width: 90px;
+      box-shadow: $boxes-shadow;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: $boxes-shadow-hover;
+      }
+    }
+  }
 }
 </style>
 
@@ -68,6 +99,11 @@ export default {
         "Organisasjonen takker for informasjonen!"
       ]
     };
+  },
+  methods: {
+    handleRegister(){
+      this.$router.push({ name: 'register' });
+    }
   }
 };
 </script>

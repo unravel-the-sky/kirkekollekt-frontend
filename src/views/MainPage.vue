@@ -1,8 +1,8 @@
 <template>
   <div class="main-page-holder">
     <top-bar class="topbar-holder"></top-bar>
-    <div class="main-panel-container"> 
-      <main-panel v-if="organisations" class="main-panel-holder" :organisations="organisations"></main-panel>
+    <div class="main-panel-container">
+      <router-view></router-view>
     </div>
     <bottom-bar class="bottombar-holder"></bottom-bar>
   </div>
@@ -15,18 +15,13 @@ body {
 }
 .main-panel-container {
   @include general-flex;
-  
+
   justify-content: center;
+  padding-top: 1.2 * $logo-height;
 }
 .main-page-holder {
   .topbar-holder {
     @include navbar;
-  }
-
-  .main-panel-holder {
-    @include general-flex;
-    
-    padding-top: 1.2*$logo-height;
   }
 
   .bottombar-holder {
@@ -57,16 +52,11 @@ export default {
     };
   },
   mounted() {
-    this.getData();
+    this.setDefaultPage();
   },
   methods: {
-    getData() {
-      try {
-        const result = auth.getHardCodedData();
-        this.organisations = result;
-      } catch (err) {
-        console.error("error while getting data: ", err);
-      }
+    setDefaultPage(){
+      this.$router.push({name: 'organisations'})
     },
     async getInfo() {
       try {
