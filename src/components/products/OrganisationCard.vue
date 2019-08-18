@@ -1,10 +1,12 @@
 <template>
   <div class="org-card-holder" @click="handleClick" :class="{'active': isActive}">
     <div class="org-card-image-holder">
-      <img :src="organisationImage" class="org-card-img">
+      <!-- <img :src="organisationImage" class="org-card-img"> -->
+      <img :src="organisation.image" class="org-card-img">
     </div>
     <div class="org-card-bottom-holder">
-      <span class="org-card-title">{{organisationTitle}}</span>
+      <!-- <span class="org-card-title">{{organisationTitle}}</span> -->
+      <span class="org-card-title">{{organisation.name}}</span>
     </div>
 
     <organisation-modal

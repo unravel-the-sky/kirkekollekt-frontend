@@ -1,4 +1,5 @@
 // this is where to fetch the data
+import axios from 'axios'
 
 // CosmisJS
 const cosmicJsApiToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNla2RlbWlyQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTU1YmU0MWE3NzYyZGZhY2ExODc4ZTg5NzNiOWI3MWEiLCJpYXQiOjE1NDk1NTMyODh9.x_-kY2tSm8BQIFqrhFyep5vAFZVsq1DZRCd2h6NRZ-Q';
@@ -27,7 +28,83 @@ const mg = mailgun.client({
     key: 'key-dd199113223399e4565548e74d19f1a5'
 })
 
+// min egen backend, endelig
+const apiUrl = 'http://localhost:5000/api/organisations'
+
+const handleResponse = (res) => {
+    const result = {
+        error: false,
+        status: res.status,
+        statusText: res.statusText,
+        data: res.data
+    }
+    return result
+}
+
+const handleError = (err, methodName) => {
+    console.error(`error on ${methodName}: ${err.response}`)
+    const error = {
+        error: true,
+        status: err.response.status,
+        statusText: err.response.statusText,
+        data: err.response.data
+    }
+    return error
+}
+
+const makeRequest = async (url, method, data) => {
+    try {
+        const res = await axios({
+            method,
+            url,
+            data
+        })
+        return handleResponse(res);
+    } catch (err) {
+        return handleError(err, url)
+    }
+}
+
 export default {
+    async sendOrganisationData(formData) {
+        const url = apiUrl
+        const data = {
+            Name: formData.name,
+            Image: formData.image,
+            Description: formData.description,
+            Email: formData.email,
+        }
+
+        const res = await makeRequest(url, 'post', data)
+        return res;
+    },
+    async getAllOrganisations() {
+        const url = apiUrl;
+        const res = await makeRequest(url, 'get')
+        return res;
+    },
+    async deleteOrganisation(id) {
+        const url = apiUrl + '/' + id;
+        const res = await makeRequest(url, 'delete');
+        return res;
+    },
+    async getOrganisation(id) {
+        const url = apiUrl + '/' + id;
+        const res = await makeRequest(url, 'get');
+        return res;
+    },
+    async updateOrganisation(id, formData) {
+        const data = {
+            Name: formData.name,
+            Image: formData.image,
+            Description: formData.description,
+            Email: formData.email,
+            Id: formData.id
+        }
+        const url = apiUrl + '/' + id;
+        const res = await makeRequest(url, 'put', data);
+        return res;
+    },
     sendEmail() {
         mg.messages.create('sandboxef7ef566179f424c941992c9111bf409.mailgun.org', {
                 from: 'Sadan <sadan@wee.com>',

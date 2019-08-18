@@ -16,7 +16,7 @@ body {
 .main-panel-container {
   @include general-flex;
 
-  justify-content: center;
+  justify-content: left;
   padding-top: 1.2 * $logo-height;
 }
 .main-page-holder {

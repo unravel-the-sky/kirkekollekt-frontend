@@ -73,3 +73,18 @@ body {
     box-shadow: $boxes-shadow-hover;
   }
 }
+
+@mixin data-holder {
+  margin: 20px 0;
+
+  input, textarea {
+    width: 40%;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 10px 15px;
+  }
+  input:focus {
+    outline: none !important;
+    border-color: grey;
+  }
+}

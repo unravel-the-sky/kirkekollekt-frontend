@@ -26,10 +26,20 @@ export default {
       organisations: null
     };
   },
-  mounted() {
-    this.getData();
+  created() {
+    // this.getData();
+    this.getOrganisations();
   },
   methods: {
+    async getOrganisations() {
+      try {
+        const res = await auth.getAllOrganisations();
+        console.log("data is: ", res.data);
+        this.organisations = res.data;
+      } catch (err) {
+        console.error("error: ", err);
+      }
+    },
     getData() {
       try {
         const result = auth.getHardCodedData();

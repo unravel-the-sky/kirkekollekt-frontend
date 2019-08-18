@@ -4,14 +4,15 @@
       <div class="close-button">
         <!-- <img @click="close()" class="desktop-close" src="@/assets/imgs/close.svg"> -->
       </div>
-      <div class="modal-header">{{organisation.title}}</div>
+      <div class="modal-header">{{organisation.name}}</div>
       <div class="modal-body">
-        <img :src="organisationImage">
+        <!-- <img :src="organisationImage"> -->
+        <img :src="organisation.image">
         <div>
           <p>Finn ut mer</p>
           <p>link to pdf</p>
         </div>
-        <generic-button :title="'select'" @clicked="handleSelect"></generic-button>
+        <!-- <generic-button :title="'select'" @clicked="handleSelect"></generic-button> -->
       </div>
       <div class="modal-footer"></div>
     </div>
@@ -39,7 +40,7 @@
   .modal-body {
     font-size: $modal-text-size;
     overflow: hidden;
-    width: 90%;
+    width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
