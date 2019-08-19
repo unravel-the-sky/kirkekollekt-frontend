@@ -29,7 +29,7 @@
     font-size: $modal-title-text-size;
     margin-bottom: 40px;
   }
-  .close-button {
+  .close-button { 
     float: right;
     cursor: pointer;
     margin-right: 20px;
