@@ -223,10 +223,10 @@ export default {
       this.selectedDates.push(eventAsDate);
 
       const orgObject = {
-        name: organisation.name,
-        email: organisation.email,
-        date: eventAsDate,
-        id: organisation.id
+        Name: organisation.name,
+        Email: organisation.email,
+        DonationDate: eventAsDate.toJSON(),
+        Id: organisation.id
       };
 
       const org = this.selectedOrganisations.find(

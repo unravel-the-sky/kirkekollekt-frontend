@@ -2,7 +2,8 @@
 import axios from 'axios'
 
 // min egen backend, endelig
-const apiUrl = 'http://kirkekollekt-backend.herokuapp.com/api/organisations'
+// const apiUrl = 'http://kirkekollekt-backend.herokuapp.com/api/organisations'
+const apiUrl = 'http://localhost:5000/api/organisations'
 
 const handleResponse = (res) => {
     const result = {
@@ -78,4 +79,14 @@ export default {
         const res = await makeRequest(url, 'put', data);
         return res;
     },
+    async sendDonations(formData) {
+        const data = {
+            Name: formData.name,
+            Info: formData.contactInfo,
+            Organisations: formData.organisations
+        }
+        const url = apiUrl + '/sendmail';
+        const res = await makeRequest(url, 'post', data);
+        return res;
+    }
 }
