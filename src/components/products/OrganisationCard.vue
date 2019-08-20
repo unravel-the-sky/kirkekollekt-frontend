@@ -101,9 +101,6 @@ export default {
     };
   },
   computed: {
-    organisationImage() {
-      return require("@/logos/" + this.organisation.image);
-    },
     organisationTitle() {
       const result = this.organisation.title
         .toLowerCase()

@@ -7,7 +7,7 @@
       <div class="modal-header">{{organisation.name}}</div>
       <div class="modal-body">
         <!-- <img :src="organisationImage"> -->
-        <img :src="organisation.image">
+        <img :src="organisation.image" />
         <div>
           <p>Finn ut mer</p>
           <p>link to pdf</p>
@@ -29,7 +29,7 @@
     font-size: $modal-title-text-size;
     margin-bottom: 40px;
   }
-  .close-button { 
+  .close-button {
     float: right;
     cursor: pointer;
     margin-right: 20px;
@@ -72,11 +72,7 @@ export default {
       default: 0
     }
   },
-  computed: {
-    organisationImage() {
-      return require("@/logos/" + this.organisation.image);
-    }
-  },
+  computed: {},
   methods: {
     handleSelect() {
       this.$emit("select", this.id);

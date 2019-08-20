@@ -162,9 +162,6 @@ export default {
         this.selectedOrganisations.push(orgObject);
       }
     },
-    getOrganisationImage(imageUrl) {
-      return require("@/logos/" + imageUrl);
-    },
     getData() {
       try {
         const result = auth.getHardCodedData();
