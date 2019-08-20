@@ -2,8 +2,8 @@
 import axios from 'axios'
 
 // min egen backend, endelig
-// const apiUrl = 'http://kirkekollekt-backend.herokuapp.com/api/organisations'
-const apiUrl = 'http://localhost:5000/api/organisations'
+const apiUrl = 'http://kirkekollekt-backend.herokuapp.com/api/organisations'
+// const apiUrl = 'http://localhost:5000/api/organisations'
 
 const handleResponse = (res) => {
     const result = {
