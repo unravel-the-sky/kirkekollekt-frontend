@@ -2,7 +2,7 @@
   <div class="admin-page-holder">
     <span class="admin-page-title">Admin Page</span>
     <div class="admin-page">
-      <div class="add-new-org-button" @click="showAddOrgModal = !showAddOrgModal">ADD NEW ORG</div>
+      <div class="add-new-org-button" @click="handleAddNew">ADD NEW ORG</div>
       <div v-if="orgs" class="admin-existing-data-holder">
         Existing organisations:
         <div v-for="org in orgs" :key="org.name" class="org-holder">
@@ -109,6 +109,10 @@ export default {
     this.getOrganisations();
   },
   methods: {
+    handleAddNew() {
+      this.orgId = null;
+      this.showAddOrgModal = !this.showAddOrgModal;
+    },
     async getOrganisations() {
       try {
         const res = await auth.getAllOrganisations();
@@ -164,7 +168,7 @@ export default {
     handleUpdate(id) {
       this.orgId = id;
       this.showAddOrgModal = true;
-    },
+    }
     // async submitOrg() {
     //   const data = {
     //     name: this.orgName,
