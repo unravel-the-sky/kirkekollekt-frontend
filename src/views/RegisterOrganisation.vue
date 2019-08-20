@@ -1,80 +1,118 @@
 <template>
-  <div class="register-holder">
-    <div class="register-orgs-holder" v-if="organisations">
-      <div>selected organsations: {{selectedOrganisations}}</div>
-      <div v-if="confirmationPage">
-        <!-- bunu sonra ayri sayfa yap route lu neyn  -->
-        <!-- also make this into component -->
-        <div class="proceed-button" @click="handleButton">
-          <span class="button-text">Tilbake</span>
-        </div>
-        <confirm-page :organisations="selectedOrganisations"></confirm-page>
-      </div>
-      <div v-else>
-        <div class="orgs-searchbar-holder">
-          <input
-            type="text"
-            v-model="searchOrg"
-            placeholder="Search organsation.."
-            id="org-search"
-            autofocus
-          />
-        </div>
+  <div class="register-page">
+    <p class="register-page-title">Register Organisation</p>
+    <span class="register-page-subtitle">how to do it</span>
 
+    <div class="register-holder">
+      <div class="register-orgs-holder" v-if="organisations">
         <div v-if="selectedOrganisations.length > 0">
+          selected organsations:
+          <span v-for="(org, index) in selectedOrganisations" :key="org.id">
+            {{org.name}}
+            <span
+              v-if="selectedOrganisations.length > 0 && index < selectedOrganisations.length -1 "
+              class="space"
+            >,</span>
+          </span>
+        </div>
+        <div v-if="confirmationPage">
+          <!-- also make this into component -->
+          <confirm-page :organisations="selectedOrganisations"></confirm-page>
           <div class="proceed-button" @click="handleButton">
-            <span class="button-text">Neste</span>
+            <span class="button-text">Tilbake</span>
           </div>
         </div>
-        <div v-if="filteredItemsList.length > 0">
-          <div v-for="org in filteredItemsList" :key="org.title" class="organisation-holder">
-            <div>
+        <div v-else>
+          <div class="orgs-action-holder">
+            <div class="orgs-searchbar-holder">
               <input
-                class="org-icon"
-                type="checkbox"
-                :value="org.title"
-                v-model="selectedOrgTitles"
+                type="text"
+                v-model="searchOrg"
+                placeholder="Search organsation.."
+                id="org-search"
+                autofocus
               />
-              <span class="org-icon">image</span>
-              <!-- <img :src="getOrganisationImage(org.image)" /> -->
-              <span>{{org.title}}</span>
             </div>
-            <div v-if="selectedOrgTitles.includes(org.title)">
-              <span class="org-icon">Date:</span>
-              <input
-                type="date"
-                placeholder="dd/mm/yyyy"
-                date-format="dd/mm/yyyy"
-                @input="handleDateInput(org)"
-              />
+
+            <div v-if="selectedOrganisations.length > 0">
+              <div class="proceed-button" @click="handleButton">
+                <span class="button-text">Neste</span>
+              </div>
             </div>
           </div>
+
+          <div v-if="filteredItemsList.length > 0">
+            <div v-for="org in filteredItemsList" :key="org.id" class="organisation-holder">
+              <div class="organisation-left-panel">
+                <label :id="org.name">
+                  <input class="org-icon" type="checkbox" :value="org.id" v-model="selectedOrgIds" />
+                  <img :src="org.image" />
+                  <span>{{org.name}}</span>
+                </label>
+              </div>
+              <div v-if="selectedOrgIds.includes(org.id)">
+                <span class="org-icon">Date:</span>
+                <input
+                  type="date"
+                  placeholder="dd/mm/yyyy"
+                  date-format="dd/mm/yyyy"
+                  @input="handleDateInput(org)"
+                />
+              </div>
+            </div>
+          </div>
+          <div v-else>ingen data</div>
         </div>
-        <div v-else>poop</div>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.register-page {
+  display: block;
+  width: 100%;
+
+  .register-page-title {
+    @include page-title;
+  }
+
+  .register-page-subtitle {
+    @include page-title;
+
+    font-weight: 400;
+    font-size: 12px;
+    margin-top: 0;
+  }
+
+  .space {
+    margin-right: 3px;
+  }
+}
+.organisation-holder {
+  img {
+    height: 120px;
+    margin-right: 40px;
+  }
+}
 .register-holder {
   @include general-flex;
 
   justify-content: center;
   width: 90%;
+  padding: 0 $default-padding-large;
 
   .proceed-button {
     @include default-button;
 
     width: 90px;
-    margin: 10px 0;
   }
 
   .orgs-searchbar-holder {
-    margin-top: 14px;
+    margin-bottom: 14px;
 
     input {
-      width: 120px;
+      width: 150px;
       border: 1px solid grey;
       border-radius: 8px;
       padding: 10px 15px;
@@ -92,6 +130,13 @@
       margin-right: 0.5rem;
     }
 
+    .orgs-action-holder {
+      @include general-flex;
+
+      justify-content: space-between;
+      width: 60%;
+    }
+
     .organisation-holder {
       @include general-flex;
 
@@ -102,6 +147,21 @@
 
       &:hover {
         background: darken(white, 5%);
+      }
+
+      .organisation-left-panel {
+        display: flex;
+        width: 100%;
+        justify-content: left;
+      }
+
+      .organisation-left-panel label {
+        @include general-flex;
+
+        display: flex;
+        width: 100%;
+        justify-content: left;
+        cursor: pointer;
       }
     }
   }
@@ -114,26 +174,42 @@ import auth from "./../auth/index";
 export default {
   name: "register-organisations",
   components: {
-    'confirm-page': () => import('./../views/Confirmation.vue')
+    "confirm-page": () => import("./../views/Confirmation.vue")
   },
   data() {
     return {
       organisations: null,
       searchOrg: "",
-      selectedOrgTitles: [],
+      selectedOrgIds: [],
       selectedDate: null,
       selectedDates: [],
       selectedOrganisations: [],
       confirmationPage: false
     };
   },
-  mounted() {
+  created() {
     this.getData();
+  },
+  watch: {
+    selectedOrgIds() {
+      console.log("is checked? ", event.target.checked);
+      console.log("value: ", event.target.defaultValue);
+
+      if (event.target.checked === false) {
+        const id = event.target.defaultValue;
+        const org = this.selectedOrganisations.find(item => item.id === id);
+        if (org) {
+          this.selectedOrganisations = this.selectedOrganisations.filter(
+            item => item.id !== id
+          );
+        }
+      }
+    }
   },
   computed: {
     filteredItemsList() {
       return this.organisations.filter(item => {
-        return item.title.toLowerCase().includes(this.searchOrg.toLowerCase());
+        return item.name.toLowerCase().includes(this.searchOrg.toLowerCase());
       });
     }
   },
@@ -147,13 +223,14 @@ export default {
       this.selectedDates.push(eventAsDate);
 
       const orgObject = {
-        title: organisation.title,
+        name: organisation.name,
         email: organisation.email,
-        date: eventAsDate
+        date: eventAsDate,
+        id: organisation.id
       };
 
       const org = this.selectedOrganisations.find(
-        item => item.title === organisation.title
+        item => item.id === organisation.id
       );
 
       if (org) {
@@ -162,10 +239,10 @@ export default {
         this.selectedOrganisations.push(orgObject);
       }
     },
-    getData() {
+    async getData() {
       try {
-        const result = auth.getHardCodedData();
-        this.organisations = result;
+        const result = await auth.getAllOrganisations();
+        this.organisations = result.data;
       } catch (err) {
         console.error("error while getting data: ", err);
       }

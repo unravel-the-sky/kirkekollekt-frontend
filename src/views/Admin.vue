@@ -40,11 +40,7 @@
   margin: 10px;
 
   .admin-page-title {
-    margin: 20px;
-    margin-bottom: 10px;
-    font-size: 25px;
-    font-weight: 800;
-    display: block;
+    @include page-title;
   }
 }
 .admin-existing-data-holder {

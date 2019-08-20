@@ -93,7 +93,7 @@ export default {
   name: "add-organisation-modal",
   components: {
     "generic-modal": () => import("./../generics/GenericModal.vue"),
-    "generic-button": () => import("./../generics/GenericButton.vue")
+    // "generic-button": () => import("./../generics/GenericButton.vue")
   },
   data() {
     return {
@@ -101,7 +101,6 @@ export default {
       orgImageUrl: "",
       orgDescription: "",
       orgEmail: "",
-      orgId: "",
       orgData: null
     };
   },

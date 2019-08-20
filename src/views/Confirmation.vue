@@ -15,6 +15,9 @@
     <div class="send-button" @click="handleButton">
       <span class="button-text">Send</span>
     </div>
+    <!-- <div class="send-button" @click="handleBackButton">
+      <span class="button-text">Tilbake</span>
+    </div> -->
   </div>
 </template>
 
@@ -62,7 +65,7 @@ export default {
   },
   methods: {
     handleButton() {
-      if (this.contactInfo == null || this.name == null) {
+      if (this.contactInfo == null || this.name == null || this.contactInfo === '' || this.name === '') {
         alert("error!");
       } else {
         const allData = {
@@ -73,9 +76,9 @@ export default {
         };
 
         console.log("send button is pressed and the object: ", allData);
-        alert('sent! TAKK!!')
+        alert("sent! TAKK!!");
 
-        this.$router.push({name: 'organisations'})
+        this.$router.push({ name: "organisations" });
       }
     }
   }

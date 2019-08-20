@@ -41,6 +41,14 @@ body {
   background: #f9f9f9;
 }
 
+@mixin page-title {
+  margin: 20px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 800;
+  display: block;
+}
+
 @mixin general-flex {
   display: flex;
   align-items: center;
@@ -77,7 +85,8 @@ body {
 @mixin data-holder {
   margin: 20px 0;
 
-  input, textarea {
+  input,
+  textarea {
     width: 40%;
     border: 1px solid grey;
     border-radius: 8px;

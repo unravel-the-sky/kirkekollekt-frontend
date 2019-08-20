@@ -59,7 +59,7 @@ export default {
   name: "organisation-modal",
   components: {
     "generic-modal": () => import("./../generics/GenericModal.vue"),
-    "generic-button": () => import("./../generics/GenericButton.vue")
+    // "generic-button": () => import("./../generics/GenericButton.vue")
   },
   props: {
     organisation: {

@@ -27,7 +27,6 @@ export default {
     };
   },
   created() {
-    // this.getData();
     this.getOrganisations();
   },
   methods: {
@@ -38,14 +37,6 @@ export default {
         this.organisations = res.data;
       } catch (err) {
         console.error("error: ", err);
-      }
-    },
-    getData() {
-      try {
-        const result = auth.getHardCodedData();
-        this.organisations = result;
-      } catch (err) {
-        console.error("error while getting data: ", err);
       }
     }
   }
