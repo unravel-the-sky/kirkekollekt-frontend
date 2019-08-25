@@ -3,7 +3,7 @@ import axios from 'axios'
 
 // min egen backend, endelig
 const apiUrl = 'https://kirkekollekt-backend.herokuapp.com/api/organisations'
-// const apiUrl = 'http://localhost:5000/api/organisations'
+// const apiUrl = 'https://localhost:5001/api/organisations'
 
 const handleResponse = (res) => {
     const result = {
@@ -54,6 +54,11 @@ export default {
     },
     async getAllOrganisations() {
         const url = apiUrl;
+        const res = await makeRequest(url, 'get')
+        return res;
+    },
+    async getAllDonations(){
+        const url = apiUrl + '/donations';
         const res = await makeRequest(url, 'get')
         return res;
     },

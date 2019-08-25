@@ -86,6 +86,7 @@
 
 <script>
 import auth from "./../auth/index";
+import { clearInterval } from "timers";
 // import axios from "axios";
 
 export default {
@@ -98,17 +99,41 @@ export default {
       orgName: "",
       orgImage: "",
       showAddOrgModal: false,
-      orgId: null
+      orgId: null,
+      polling: null
     };
   },
   components: {
     "add-organisation-modal": () =>
       import("./../components/products/AddOrganisationModal")
   },
+  created() {
+    this.pollData();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
+  },
   mounted() {
+    // this.$router.push({name: 'login'});
     this.getOrganisations();
   },
   methods: {
+    pollData() {
+      // this.polling = setInterval(async () => {
+      //   console.log("pollinggg..");
+      //   this.getDonations();
+      // }, 10000);
+
+      // devam et burdan. maybe we don't need polling in the end. a refresh button that's it
+    },
+    async getDonations() {
+      try {
+        const res = await auth.getAllDonations();
+        console.log("donations: ", res.data);
+      } catch (err) {
+        console.error("errorrr: ", err);
+      }
+    },
     handleAddNew() {
       this.orgId = null;
       this.showAddOrgModal = !this.showAddOrgModal;

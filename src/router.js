@@ -5,6 +5,7 @@ import Home from './views/MainPage'
 import RegisterOrganisation from './views/RegisterOrganisation'
 import Organisations from './views/Organisations'
 import Admin from './views/Admin'
+import Login from './views/LoginPage'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/admin',
       name: 'admin',
       component: Admin
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/about',
