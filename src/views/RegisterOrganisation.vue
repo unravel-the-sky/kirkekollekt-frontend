@@ -1,12 +1,15 @@
 <template>
   <div class="register-page">
-    <p class="register-page-title">Register Organisation</p>
-    <span class="register-page-subtitle">how to do it</span>
+    <p class="register-page-title">Registrer kollekter</p>
+    <ol>
+      <li v-for="step in registerSteps" :key="step.name" class="register-page-subtitle">{{step}}</li>
+    </ol>
+    <!-- <span class="register-page-subtitle">how to do it</span> -->
 
     <div class="register-holder">
       <div class="register-orgs-holder" v-if="organisations">
         <div v-if="selectedOrganisations.length > 0">
-          selected organsations:
+          Valgt organisasjoner:
           <span v-for="(org, index) in selectedOrganisations" :key="org.id">
             {{org.name}}
             <span
@@ -28,7 +31,7 @@
               <input
                 type="text"
                 v-model="searchOrg"
-                placeholder="Search organsation.."
+                placeholder="Søk organisasjon.."
                 id="org-search"
                 autofocus
               />
@@ -73,8 +76,14 @@
   display: block;
   width: 100%;
 
+  ol {
+    padding-inline-start: 15px;
+  }
+
   .register-page-title {
     @include page-title;
+
+    display: block;
   }
 
   .register-page-subtitle {
@@ -184,7 +193,13 @@ export default {
       selectedDate: null,
       selectedDates: [],
       selectedOrganisations: [],
-      confirmationPage: false
+      confirmationPage: false,
+      registerSteps: [
+        "Velg organisasjon",
+        "Velg dato for kollekt",
+        "Gjenta for flere organisasjoner",
+        "Trykk neste"
+      ]
     };
   },
   created() {

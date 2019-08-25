@@ -41,6 +41,8 @@
 
   .admin-page-title {
     @include page-title;
+
+    display: block;
   }
 }
 .admin-existing-data-holder {

@@ -1,16 +1,12 @@
 <template>
   <div class="confirmation-holder">
     <div class="data-holder">
-      <p>Navn:*</p>
+      <p>Menighetens navn:*</p>
       <input type="text" v-model="name" />
     </div>
     <div class="data-holder">
       <p>Menighetens kontaktinfo (telefonnummer og/ eller e-post):*</p>
       <input type="text" v-model="contactInfo" />
-    </div>
-    <div class="data-holder">
-      <p>Eventuell annen info til organisasjon:</p>
-      <input type="text" v-model="otherInfo" />
     </div>
     <div class="send-button" @click="handleButton">
       <span class="button-text">Send</span>
@@ -55,7 +51,7 @@ export default {
     return {
       name: null,
       contactInfo: null,
-      otherInfo: null,
+      otherInfo: '',
       allData: null
     };
   },

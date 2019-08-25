@@ -3,10 +3,18 @@
     <div class="topbar-left-holder">
       <img src="@/assets/imgs/kirkekollekt-header.png" class="logo-img" />
     </div>
-    <div class="topbar-register-holder" v-if="$route.path !== '/register'">
-      <span class="register-text">to register organisation</span>
-      <div class="register-button-holder" @click="handleRegister">
-        <span class="register-button-text">klikk her</span>
+    <div class="topbar-center-holder">
+      <div class="topbar-register-holder" v-if="$route.path !== '/register'">
+        <span class="register-text">Registrer kollekter her</span>
+        <div class="register-button-holder" @click="handleRegister">
+          <span class="register-button-text">Register</span>
+        </div>
+      </div>
+      <div class="topbar-all-documents-part">
+        <span>
+          Last ned alle offersøknader
+          <a href="https://google.com" target="_blank">her</a>
+        </span>
       </div>
     </div>
     <img src="@/assets/imgs/kirkekollekt-logo.jpg" class="logo-img" />
@@ -54,6 +62,11 @@
       }
     }
   }
+  
+  .topbar-all-documents-part {
+    margin-top: 10px;
+    font-size: 12px;
+  }
 
   .topbar-register-holder {
     @include general-flex;
@@ -81,8 +94,8 @@ export default {
     };
   },
   methods: {
-    handleRegister(){
-      this.$router.push({ name: 'register' });
+    handleRegister() {
+      this.$router.push({ name: "register" });
     }
   }
 };
