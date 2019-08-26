@@ -9,8 +9,7 @@
         <!-- <img :src="organisationImage"> -->
         <img :src="organisation.image" />
         <div>
-          <p>Finn ut mer</p>
-          <p>link to pdf</p>
+          <p>{{organisation.description}}</p>
         </div>
         <!-- <generic-button :title="'select'" @clicked="handleSelect"></generic-button> -->
       </div>
