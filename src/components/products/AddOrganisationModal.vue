@@ -126,7 +126,7 @@ export default {
         this.orgName = data.name;
         this.orgImageUrl = data.image;
         this.orgDescription = data.description;
-        this.orgEmail = data.email;
+        this.orgEmail = data.emails;
         this.orgId = data.id;
       } catch (err) {
         console.error("error! ", err);
@@ -135,12 +135,14 @@ export default {
     handleSubmitOrg() {
       const correctedImageUrl = this.orgImageUrl.replace("open", "uc");
 
+      const emails = this.orgEmail.split(',')
+
       if (this.orgId) {
         const data = {
           name: this.orgName,
           image: correctedImageUrl,
           description: this.orgDescription,
-          email: this.orgEmail,
+          emails: emails,
           id: this.orgId
         };
         this.$emit("submitUpdate", data);
@@ -150,7 +152,7 @@ export default {
           name: this.orgName,
           image: correctedImageUrl,
           description: this.orgDescription,
-          email: this.orgEmail
+          emails: emails
         };
         this.$emit("submit", data);
         this.close();

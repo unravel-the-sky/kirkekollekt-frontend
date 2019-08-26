@@ -237,10 +237,13 @@ export default {
       this.selectedDate = eventAsDate;
       this.selectedDates.push(eventAsDate);
 
+      const dates = new Array();
+      dates.push(eventAsDate.toJSON())
+
       const orgObject = {
         Name: organisation.name,
-        Email: organisation.email,
-        DonationDate: eventAsDate.toJSON(),
+        Emails: organisation.emails,
+        DonationDates: dates,
         Id: organisation.id
       };
 

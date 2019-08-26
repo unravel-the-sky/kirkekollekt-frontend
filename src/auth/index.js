@@ -46,7 +46,7 @@ export default {
             Name: formData.name,
             Image: formData.image,
             Description: formData.description,
-            Email: formData.email,
+            Emails: formData.emails,
         }
 
         const res = await makeRequest(url, 'post', data)
@@ -77,7 +77,7 @@ export default {
             Name: formData.name,
             Image: formData.image,
             Description: formData.description,
-            Email: formData.email,
+            Emails: formData.emails,
             Id: formData.id
         }
         const url = apiUrl + '/' + id;

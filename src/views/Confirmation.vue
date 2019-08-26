@@ -86,7 +86,7 @@ export default {
       try {
         const res = await auth.sendDonations(data);
         console.log("response: ", res.data);
-        alert("sent! TAKK!!");
+        alert("Takk! Dine kollektdatoer er registrert og informasjon er sendt til organisasjonene.");
 
         this.$router.push({ name: "organisations" });
 
