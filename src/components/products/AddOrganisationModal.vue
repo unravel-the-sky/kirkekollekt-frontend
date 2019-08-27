@@ -135,7 +135,7 @@ export default {
     handleSubmitOrg() {
       const correctedImageUrl = this.orgImageUrl.replace("open", "uc");
 
-      const emails = this.orgEmail.split(',')
+      const emails = Array.isArray(this.orgEmail) ? this.orgEmail : this.orgEmail.split(',')
 
       if (this.orgId) {
         const data = {
