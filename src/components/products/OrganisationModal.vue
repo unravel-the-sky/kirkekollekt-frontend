@@ -9,7 +9,7 @@
         <!-- <img :src="organisationImage"> -->
         <img :src="organisation.image" />
         <div>
-          <p>{{organisation.description}}</p>
+          <p v-html="organisation.description"></p>
         </div>
         <!-- <generic-button :title="'select'" @clicked="handleSelect"></generic-button> -->
       </div>
