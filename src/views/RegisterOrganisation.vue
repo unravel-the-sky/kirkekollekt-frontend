@@ -61,6 +61,16 @@
                   date-format="dd/mm/yyyy"
                   @input="handleDateInput(org)"
                 />
+                <div v-for="dateInput in moreDates" :key="dateInput.name">
+                  <span class="org-icon">Date:</span>
+                  <input
+                    type="date"
+                    placeholder="dd/mm/yyyy"
+                    date-format="dd/mm/yyyy"
+                    @input="handleDateInput(org)"
+                  />
+                </div>
+                <img v-if="!hidePlusIcon" src="@/assets/imgs/plus.svg" class="add-date-icon" @click="handleAddMoreDates" />
               </div>
             </div>
           </div>
@@ -102,6 +112,10 @@
   img {
     height: 120px;
     margin-right: 40px;
+  }
+
+  .add-date-icon {
+    height: 12px;
   }
 }
 .register-holder {
@@ -192,6 +206,8 @@ export default {
       selectedOrgIds: [],
       selectedDate: null,
       selectedDates: [],
+      moreDates: [],
+      hidePlusIcon: false,
       selectedOrganisations: [],
       confirmationPage: false,
       registerSteps: [
@@ -232,27 +248,30 @@ export default {
     handleButton() {
       this.confirmationPage = !this.confirmationPage;
     },
+    handleAddMoreDates() {
+      this.moreDates.push("wee");
+      if (this.moreDates.length === 4) {
+        this.hidePlusIcon = true;
+      }
+    },
     handleDateInput(organisation) {
       const eventAsDate = event.target.valueAsDate;
       this.selectedDate = eventAsDate;
-      this.selectedDates.push(eventAsDate);
-
-      const dates = new Array();
-      dates.push(eventAsDate.toJSON())
+      this.selectedDates.push(eventAsDate.toJSON());
 
       const orgObject = {
         Name: organisation.name,
         Emails: organisation.emails,
-        DonationDates: dates,
+        DonationDates: this.selectedDates,
         Id: organisation.id
       };
 
       const org = this.selectedOrganisations.find(
-        item => item.id === organisation.id
+        item => item.id === organisation.Id
       );
 
       if (org) {
-        org.date = eventAsDate;
+        org.DonationDates = this.selectedDates;
       } else {
         this.selectedOrganisations.push(orgObject);
       }
