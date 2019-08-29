@@ -205,7 +205,7 @@ export default {
       searchOrg: "",
       selectedOrgIds: [],
       selectedDate: null,
-      selectedDates: [],
+      selectedDates: {},
       moreDates: [],
       hidePlusIcon: false,
       selectedOrganisations: [],
@@ -257,21 +257,25 @@ export default {
     handleDateInput(organisation) {
       const eventAsDate = event.target.valueAsDate;
       this.selectedDate = eventAsDate;
-      this.selectedDates.push(eventAsDate.toJSON());
+
+      if (this.selectedDates[organisation.id] == null) {
+        this.selectedDates[organisation.id] = new Array();
+      }
+      this.selectedDates[organisation.id].push(eventAsDate.toJSON());
 
       const orgObject = {
         Name: organisation.name,
         Emails: organisation.emails,
-        DonationDates: this.selectedDates,
+        DonationDates: this.selectedDates[organisation.id],
         Id: organisation.id
       };
 
       const org = this.selectedOrganisations.find(
-        item => item.id === organisation.Id
+        item => item.Id === organisation.id
       );
 
       if (org) {
-        org.DonationDates = this.selectedDates;
+        org.DonationDates = this.selectedDates[organisation.id];
       } else {
         this.selectedOrganisations.push(orgObject);
       }
