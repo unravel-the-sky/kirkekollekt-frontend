@@ -7,7 +7,7 @@
       <div class="topbar-register-holder" v-if="$route.path !== '/register'">
         <span class="register-text">Registrer kollekter her</span>
         <div class="register-button-holder" @click="handleRegister">
-          <span class="register-button-text">Register</span>
+          <span class="register-button-text">Registrer</span>
         </div>
       </div>
       <div class="topbar-all-documents-part">
