@@ -57,7 +57,7 @@
 
     .org-card-img {
       width: 120px;
-      object-fit: fill;
+      object-fit: contain;
     }
   }
   .org-card-bottom-holder {
