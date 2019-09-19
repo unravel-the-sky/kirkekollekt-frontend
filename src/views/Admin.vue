@@ -70,6 +70,7 @@
       height: 120px;
       max-width: 120px;
       margin-right: 40px;
+      object-fit: contain;
     }
 
     .org-description {
