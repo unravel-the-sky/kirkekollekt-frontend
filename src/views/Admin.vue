@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="donations-log-holder">
-        <h3>Donations log</h3>
+        <h3>Donations log ({{donations.length}})</h3>
         <div class="donations-log-list">
           <div
             v-for="donation in donations"
@@ -37,7 +37,7 @@
                 <span class="org-name">{{org.name}}</span>
                 <div class="org-dates">
                   <span>Dates (y-m-d):&nbsp;</span>
-                  <span v-for="date in org.donationDates" :key="date.name">{{displayDate(date)}},</span>
+                  <span v-for="date in org.donationDates" :key="date.name">{{displayDate(date)}},&nbsp;</span>
                 </div>
               </div>
             </div>
