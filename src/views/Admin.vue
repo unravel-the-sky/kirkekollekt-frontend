@@ -2,21 +2,45 @@
   <div class="admin-page-holder">
     <span class="admin-page-title">Admin Page</span>
     <div class="admin-page">
-      <div class="add-new-org-button" @click="handleAddNew">ADD NEW ORG</div>
-      <div v-if="orgs" class="admin-existing-data-holder">
-        Existing organisations:
-        <div v-for="org in orgs" :key="org.name" class="org-holder">
-          <div>
-            <div class="org-name">{{org.name}}</div>
-            <img class="org-logo" :src="org.image" />
+      <div class="organisations-holder">
+        <div class="add-new-org-button" @click="handleAddNew">ADD NEW ORG</div>
+        <div v-if="orgs" class="admin-existing-data-holder">
+          Existing organisations:
+          <div v-for="org in orgs" :key="org.name" class="org-holder">
+            <div>
+              <div class="org-name">{{org.name}}</div>
+              <img class="org-logo" :src="org.image" />
+            </div>
+            <div>
+              <div class="org-description" v-html="org.description"></div>
+              <div class="org-email">{{org.email}}</div>
+            </div>
+            <div>
+              <button @click="handleUpdate(org.id)">update</button>
+              <button @click="handleDelete(org.id)">delete</button>
+            </div>
           </div>
-          <div>
-            <div class="org-description" v-html="org.description"></div>
-            <div class="org-email">{{org.email}}</div>
-          </div>
-          <div>
-            <button @click="handleUpdate(org.id)">update</button>
-            <button @click="handleDelete(org.id)">delete</button>
+        </div>
+      </div>
+      <div class="donations-log-holder">
+        <h3>Donations log</h3>
+        <div class="donations-log-list">
+          <div
+            v-for="donation in donations"
+            :key="donation.id"
+            class="donation-log donations-log-list"
+          >
+            <p class="donation-element">Donator: {{donation.name}}</p>
+            <div class="donation-element">
+              Donations:
+              <div v-for="org in donation.organisations" :key="org.id">
+                <span class="org-name">{{org.name}}</span>
+                <div class="org-dates">
+                  <span>Dates (y-m-d):&nbsp;</span>
+                  <span v-for="date in org.donationDates" :key="date.name">{{displayDate(date)}},</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -45,46 +69,80 @@
     display: block;
   }
 }
-.admin-existing-data-holder {
-  padding: 20px;
+.admin-page {
+  display: flex;
+  justify-content: center;
+  align-content: center;
 
-  .org-holder {
-    margin: 15px 0;
-    padding: 15px;
-    border: 1px solid grey;
-    border-radius: 8px;
-    font-size: $modal-text-size;
-    overflow: hidden;
-    // width: 40%;
-    max-width: 650px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: auto;
+  .donations-log-holder {
+    width: 40%;
 
-    &:hover {
-      background: darken(white, 5%);
-    }
+    .donations-log-list {
+      padding: 10px;
+      border: 1px solid grey;
+      border-radius: 8px;
 
-    img {
-      height: 120px;
-      max-width: 120px;
-      margin-right: 40px;
-      object-fit: contain;
-    }
+      .donation-log {
+        margin: 10px 0;
+        &:hover {
+          background: rgb(233, 233, 233);
+        }
 
-    .org-description {
-      margin-bottom: 10px;
+        .org-name {
+          font-weight: 500;
+        }
+        .org-dates {
+          margin-bottom: 15px;
+        }
+      }
     }
   }
-}
-.data-holder {
-  @include data-holder;
-}
-.add-new-org-button {
-  @include default-button;
 
-  width: 120px;
+  .organisations-holder {
+    width: 60%;
+    .admin-existing-data-holder {
+      padding: 20px;
+
+      .org-holder {
+        margin: 15px 0;
+        padding: 15px;
+        border: 1px solid grey;
+        border-radius: 8px;
+        font-size: $modal-text-size;
+        overflow: hidden;
+        // width: 40%;
+        max-width: 650px;
+        // width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: auto;
+
+        &:hover {
+          background: darken(white, 5%);
+        }
+
+        img {
+          height: 120px;
+          max-width: 120px;
+          margin-right: 40px;
+          object-fit: contain;
+        }
+
+        .org-description {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    .data-holder {
+      @include data-holder;
+    }
+    .add-new-org-button {
+      @include default-button;
+
+      width: 120px;
+    }
+  }
 }
 </style>
 
@@ -104,7 +162,8 @@ export default {
       orgImage: "",
       showAddOrgModal: false,
       orgId: null,
-      polling: null
+      polling: null,
+      donations: null
     };
   },
   components: {
@@ -120,20 +179,31 @@ export default {
   mounted() {
     // this.$router.push({name: 'login'});
     this.getOrganisations();
+    this.getDonations();
   },
   methods: {
+    displayDate(date) {
+      const nativeDate = new Date(date);
+      return (
+        nativeDate.getFullYear() +
+        "-" +
+        (nativeDate.getMonth() + 1) +
+        "-" +
+        nativeDate.getDate()
+      );
+    },
     pollData() {
       // this.polling = setInterval(async () => {
       //   console.log("pollinggg..");
       //   this.getDonations();
       // }, 10000);
-
       // devam et burdan. maybe we don't need polling in the end. a refresh button that's it
     },
     async getDonations() {
       try {
         const res = await auth.getAllDonations();
         console.log("donations: ", res.data);
+        this.donations = res.data;
       } catch (err) {
         console.error("errorrr: ", err);
       }
