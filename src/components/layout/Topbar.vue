@@ -13,11 +13,16 @@
       <div class="topbar-all-documents-part">
         <span>
           Last ned alle offersøknader
-          <a href="https://google.com" target="_blank">her</a>
+          <a
+            href="https://drive.google.com/uc?id=1joFzK-8vFEgYsQ57JfxzXcuINXMAOarb"
+            target="_blank"
+          >her</a>
         </span>
       </div>
     </div>
-    <img src="@/assets/imgs/kirkekollekt-logo.jpg" class="logo-img" />
+    <a href="https://kpk.no" target="_blank">
+      <img src="@/assets/imgs/kirkekollekt-logo.jpg" class="logo-img" />
+    </a>
   </div>
 </template>
 
@@ -62,7 +67,7 @@
       }
     }
   }
-  
+
   .topbar-all-documents-part {
     margin-top: 10px;
     font-size: 12px;
