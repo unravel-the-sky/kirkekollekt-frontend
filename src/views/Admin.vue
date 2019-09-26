@@ -203,7 +203,7 @@ export default {
       try {
         const res = await auth.getAllDonations();
         console.log("donations: ", res.data);
-        this.donations = res.data;
+        this.donations = res.data.reverse();
       } catch (err) {
         console.error("errorrr: ", err);
       }
