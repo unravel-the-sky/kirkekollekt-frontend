@@ -5,7 +5,7 @@ const serveStatic = require("serve-static")
 const path = require('path');
 var app = express();
 
-app.use(forceSecure(['kirkekollekt-frontend.herokuapp.com']));
+app.use(forceSecure(['kirkekollekt.no']));
 app.use(history())
 
 app.use(serveStatic(path.join(__dirname, 'dist')));
