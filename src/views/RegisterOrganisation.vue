@@ -9,9 +9,9 @@
     <div class="register-holder">
       <div class="register-orgs-holder" v-if="organisations">
         <div v-if="selectedOrganisations.length > 0">
-          Valgt organisasjoner:
+          Valgte organisasjoner:
           <span v-for="(org, index) in selectedOrganisations" :key="org.id">
-            {{org.name}}
+            {{org.Name}}
             <span
               v-if="selectedOrganisations.length > 0 && index < selectedOrganisations.length -1 "
               class="space"
