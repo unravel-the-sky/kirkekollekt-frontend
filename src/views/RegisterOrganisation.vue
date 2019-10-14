@@ -228,10 +228,10 @@ export default {
 
       if (event.target.checked === false) {
         const id = event.target.defaultValue;
-        const org = this.selectedOrganisations.find(item => item.id === id);
+        const org = this.selectedOrganisations.find(item => item.Id === id);
         if (org) {
           this.selectedOrganisations = this.selectedOrganisations.filter(
-            item => item.id !== id
+            item => item.Id !== id
           );
         }
       }
