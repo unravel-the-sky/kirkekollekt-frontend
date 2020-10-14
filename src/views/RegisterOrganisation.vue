@@ -2,7 +2,13 @@
   <div class="register-page">
     <p class="register-page-title">Registrer kollekter</p>
     <ol>
-      <li v-for="step in registerSteps" :key="step.name" class="register-page-subtitle">{{step}}</li>
+      <li
+        v-for="step in registerSteps"
+        :key="step.name"
+        class="register-page-subtitle"
+      >
+        {{ step }}
+      </li>
     </ol>
     <!-- <span class="register-page-subtitle">how to do it</span> -->
 
@@ -11,11 +17,15 @@
         <div v-if="selectedOrganisations.length > 0">
           Valgte organisasjoner:
           <span v-for="(org, index) in selectedOrganisations" :key="org.id">
-            {{org.Name}}
+            {{ org.Name }}
             <span
-              v-if="selectedOrganisations.length > 0 && index < selectedOrganisations.length -1 "
+              v-if="
+                selectedOrganisations.length > 0 &&
+                  index < selectedOrganisations.length - 1
+              "
               class="space"
-            >,</span>
+              >,</span
+            >
           </span>
         </div>
         <div v-if="confirmationPage">
@@ -45,12 +55,21 @@
           </div>
 
           <div v-if="filteredItemsList.length > 0">
-            <div v-for="org in filteredItemsList" :key="org.id" class="organisation-holder">
+            <div
+              v-for="org in filteredItemsList"
+              :key="org.id"
+              class="organisation-holder"
+            >
               <div class="organisation-left-panel">
                 <label :id="org.name">
-                  <input class="org-icon" type="checkbox" :value="org.id" v-model="selectedOrgIds" />
+                  <input
+                    class="org-icon"
+                    type="checkbox"
+                    :value="org.id"
+                    v-model="selectedOrgIds"
+                  />
                   <img :src="org.image" />
-                  <span>{{org.name}}</span>
+                  <span>{{ org.name }}</span>
                 </label>
               </div>
               <div v-if="selectedOrgIds.includes(org.id)">
@@ -70,7 +89,12 @@
                     @input="handleDateInput(org)"
                   />
                 </div>
-                <img v-if="!hidePlusIcon" src="@/assets/imgs/plus.svg" class="add-date-icon" @click="handleAddMoreDates" />
+                <img
+                  v-if="!hidePlusIcon"
+                  src="@/assets/imgs/plus.svg"
+                  class="add-date-icon"
+                  @click="handleAddMoreDates"
+                />
               </div>
             </div>
           </div>
@@ -78,6 +102,11 @@
         </div>
       </div>
     </div>
+    <register-organisation-modal
+      v-if="showConfirmationDialog"
+      @close="showConfirmationDialog = !showConfirmationDialog"
+      @advance="handleAdvance"
+    ></register-organisation-modal>
   </div>
 </template>
 
@@ -192,17 +221,19 @@
 </style>
 
 <script>
-import auth from "./../auth/index";
+import auth from './../auth/index';
 
 export default {
-  name: "register-organisations",
+  name: 'register-organisations',
   components: {
-    "confirm-page": () => import("./../views/Confirmation.vue")
+    'confirm-page': () => import('./../views/Confirmation.vue'),
+    'register-organisation-modal': () =>
+      import('./../components/products/RegisterOrganisationModal.vue'),
   },
   data() {
     return {
       organisations: null,
-      searchOrg: "",
+      searchOrg: '',
       selectedOrgIds: [],
       selectedDate: null,
       selectedDates: {},
@@ -210,12 +241,13 @@ export default {
       hidePlusIcon: false,
       selectedOrganisations: [],
       confirmationPage: false,
+      showConfirmationDialog: false,
       registerSteps: [
-        "Velg organisasjon",
-        "Velg dato for kollekt",
-        "Gjenta for flere organisasjoner",
-        "Trykk neste"
-      ]
+        'Velg organisasjon',
+        'Velg dato for kollekt',
+        'Gjenta for flere organisasjoner',
+        'Trykk neste',
+      ],
     };
   },
   created() {
@@ -223,33 +255,36 @@ export default {
   },
   watch: {
     selectedOrgIds() {
-      console.log("is checked? ", event.target.checked);
-      console.log("value: ", event.target.defaultValue);
+      console.log('is checked? ', event.target.checked);
+      console.log('value: ', event.target.defaultValue);
 
       if (event.target.checked === false) {
         const id = event.target.defaultValue;
-        const org = this.selectedOrganisations.find(item => item.Id === id);
+        const org = this.selectedOrganisations.find((item) => item.Id === id);
         if (org) {
           this.selectedOrganisations = this.selectedOrganisations.filter(
-            item => item.Id !== id
+            (item) => item.Id !== id
           );
         }
       }
-    }
+    },
   },
   computed: {
     filteredItemsList() {
-      return this.organisations.filter(item => {
+      return this.organisations.filter((item) => {
         return item.name.toLowerCase().includes(this.searchOrg.toLowerCase());
       });
-    }
+    },
   },
   methods: {
     handleButton() {
+      this.showConfirmationDialog = !this.showConfirmationDialog;
+    },
+    handleAdvance() {
       this.confirmationPage = !this.confirmationPage;
     },
     handleAddMoreDates() {
-      this.moreDates.push("wee");
+      this.moreDates.push('wee');
       if (this.moreDates.length === 4) {
         this.hidePlusIcon = true;
       }
@@ -267,11 +302,11 @@ export default {
         Name: organisation.name,
         Emails: organisation.emails,
         DonationDates: this.selectedDates[organisation.id],
-        Id: organisation.id
+        Id: organisation.id,
       };
 
       const org = this.selectedOrganisations.find(
-        item => item.Id === organisation.id
+        (item) => item.Id === organisation.id
       );
 
       if (org) {
@@ -285,9 +320,9 @@ export default {
         const result = await auth.getAllOrganisations();
         this.organisations = result.data;
       } catch (err) {
-        console.error("error while getting data: ", err);
+        console.error('error while getting data: ', err);
       }
-    }
-  }
+    },
+  },
 };
 </script>
