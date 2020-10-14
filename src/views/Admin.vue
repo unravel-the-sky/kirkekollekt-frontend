@@ -215,7 +215,6 @@ export default {
     async getOrganisations() {
       try {
         const res = await auth.getAllOrganisations();
-        console.log("data is: ", res.data);
         this.orgs = res.data;
       } catch (err) {
         console.error("error is: ", err);
