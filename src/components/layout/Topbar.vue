@@ -14,7 +14,7 @@
         <span>
           Last ned alle offersøknader
           <a
-            href="https://drive.google.com/uc?id=1dYXV--7SCyd3ZJBYWhSWC5_oGMnoRFDQ"
+            href="https://drive.google.com/uc?id=138h3VAhWR88ZRmWcVqOKPRNL-fO3JpNV"
             target="_blank"
           >her</a>
         </span>
