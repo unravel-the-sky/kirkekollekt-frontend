@@ -297,7 +297,7 @@ export default {
         this.selectedDates[organisation.id] = new Array();
       }
 
-      this.selectedDates[organisation.id].length === (moreDates.length - 1)
+      this.selectedDates[organisation.id].length === (this.moreDates.length - 1)
         ? this.selectedDates[organisation.id] = eventAsDate.toJSON() 
         : this.selectedDates[organisation.id].push(eventAsDate.toJSON())
 
