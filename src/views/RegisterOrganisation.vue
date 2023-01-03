@@ -297,9 +297,11 @@ export default {
         this.selectedDates[organisation.id] = new Array();
       }
 
-      this.selectedDates[organisation.id].length === this.moreDates.length
-        ? this.selectedDates[organisation.id] = eventAsDate.toJSON() 
-        : this.selectedDates[organisation.id].push(eventAsDate.toJSON())
+      if (this.selectedDates[organisation.id].length === this.moreDates.length) {
+        this.selectedDates[organisation.id] = eventAsDate.toJSON();
+      } else {
+        this.selectedDates[organisation.id].push(eventAsDate.toJSON());
+      }
 
       const orgObject = {
         Name: organisation.name,
