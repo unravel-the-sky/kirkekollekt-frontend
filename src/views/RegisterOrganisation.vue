@@ -298,7 +298,7 @@ export default {
       }
 
       if (this.selectedDates[organisation.id].length === this.moreDates.length) {
-        this.selectedDates[organisation.id] = eventAsDate.toJSON();
+        this.selectedDates[organisation.id][this.moreDates.length] = eventAsDate.toJSON();
       } else {
         this.selectedDates[organisation.id].push(eventAsDate.toJSON());
       }
