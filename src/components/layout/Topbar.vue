@@ -10,15 +10,7 @@
           <span class="register-button-text">Registrer</span>
         </div>
       </div>
-      <div class="topbar-all-documents-part">
-        <span>
-          Last ned alle offersøknader
-          <a
-            href="https://drive.google.com/file/d/1HSXcyM_7B8ZwuZseK6xGG3wBKvldyZG_/view?usp=sharing"
-            target="_blank"
-          >her</a>
-        </span>
-      </div>
+      <div class="topbar-all-documents-part"></div>
     </div>
     <a href="https://kpk.no" target="_blank">
       <img src="@/assets/imgs/kirkekollekt-logo.jpg" class="logo-img" />
